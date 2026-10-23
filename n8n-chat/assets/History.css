@@ -1,0 +1,97 @@
+.chat-layout { flex: 1; display: flex; gap: 1rem; min-height: 0; padding: 0 1rem; }
+.chat-layout .chat-container { margin: 1rem auto; min-width: 0; }
+
+/* Painel de conversas */
+.history-panel {
+  width: 280px; flex-shrink: 0; margin: 1rem 0; display: flex; flex-direction: column;
+  background: var(--card, #fff); border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;
+}
+.history-head { display: flex; align-items: center; justify-content: space-between; padding: .85rem .9rem .5rem; }
+.history-head strong { font-size: .95rem; }
+.hist-new {
+  display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .7rem; border-radius: 8px;
+  border: 1px solid #cbd5e1; background: transparent; cursor: pointer; font: inherit; font-size: .8rem;
+}
+.hist-new:hover { background: rgba(100,116,139,.12); }
+#historySearch {
+  margin: 0 .9rem .6rem; padding: .45rem .7rem; border-radius: 8px; border: 1px solid #cbd5e1;
+  font: inherit; font-size: .85rem; background: transparent; color: inherit;
+}
+.history-list { flex: 1; overflow-y: auto; padding: 0 .5rem .6rem; }
+.hist-empty { padding: 1rem; font-size: .85rem; opacity: .65; text-align: center; }
+.hist-group { font-size: .72rem; opacity: .6; padding: .6rem .5rem .25rem; }
+
+.hist-item {
+  position: relative; display: flex; flex-direction: column; gap: 2px; padding: .55rem .6rem;
+  border-radius: 10px; cursor: pointer; border: 1px solid transparent;
+}
+.hist-item:hover { background: rgba(100,116,139,.1); }
+.hist-item.active { background: rgba(37,99,235,.12); border-color: rgba(37,99,235,.35); }
+.hist-title { font-size: .86rem; font-weight: 600; padding-right: 4.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hist-meta { font-size: .72rem; opacity: .6; display: flex; align-items: center; gap: .35rem; }
+.hist-actions { position: absolute; top: .4rem; right: .35rem; display: none; gap: 2px; }
+.hist-item:hover .hist-actions, .hist-item.active .hist-actions { display: flex; }
+.hist-actions button {
+  width: 24px; height: 24px; display: grid; place-items: center; padding: 0; border-radius: 6px;
+  border: 0; background: transparent; cursor: pointer; font-size: .8rem; color: inherit;
+}
+.hist-actions button:hover { background: rgba(100,116,139,.25); }
+
+/* Barra acima do chat */
+.chat-toolbar { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 0 .25rem .5rem; }
+.chat-toolbar .conv-title { font-weight: 600; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.toolbar-btns { display: flex; gap: .4rem; }
+.toolbar-btns button {
+  display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .8rem; border-radius: 8px;
+  border: 1px solid #cbd5e1; background: transparent; cursor: pointer; font: inherit; font-size: .85rem;
+}
+.toolbar-btns button:disabled { opacity: .4; cursor: not-allowed; }
+.history-toggle { display: none; }
+
+/* Mensagens carregadas */
+.message .msg-text { white-space: pre-wrap; word-break: break-word; }
+
+/* Aviso de conversa compartilhada */
+.shared-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
+  padding: .65rem .9rem; margin-bottom: .6rem; border-radius: 10px; font-size: .88rem;
+  background: rgba(37,99,235,.12); border: 1px solid rgba(37,99,235,.35);
+}
+.shared-banner button { padding: .4rem .8rem; border-radius: 8px; border: 0; background: #2563eb; color: #fff !important; cursor: pointer; font: inherit; font-size: .85rem; }
+
+/* Modal de compartilhamento */
+.share-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: grid; place-items: center; z-index: 100; padding: 1rem; }
+.share-modal { width: min(440px, 100%); background: #fff; color: #1c1917; border-radius: 14px; padding: 1.25rem; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.share-modal h3 { margin: 0 0 .35rem; font-size: 1.05rem; }
+.share-modal p { margin: 0 0 .9rem; font-size: .88rem; opacity: .75; }
+.share-row { display: flex; gap: .5rem; }
+.share-row input { flex: 1; min-width: 0; padding: .5rem .7rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: .85rem; }
+.share-btn { padding: .5rem .9rem; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc; color: #1c1917; cursor: pointer; font: inherit; font-size: .85rem; }
+.share-btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+.share-foot { display: flex; justify-content: space-between; margin-top: 1rem; }
+.share-btn.danger { color: #b91c1c; }
+
+/* Modo escuro (os !important vencem as regras genéricas já existentes no chat.php) */
+html.dark .history-panel { background: #1c1917 !important; border-color: #292524 !important; }
+html.dark .hist-new, html.dark .toolbar-btns button, html.dark #historySearch { border-color: #44403c !important; }
+html.dark .hist-item.active { background: rgba(96,165,250,.16) !important; border-color: rgba(96,165,250,.4) !important; }
+html.dark .hist-actions button { background: transparent !important; }
+html.dark .hist-actions button:hover, html.dark .hist-new:hover { background: #292524 !important; }
+html.dark .share-modal { background: #1c1917 !important; color: #f5f5f4 !important; }
+html.dark .share-modal input { background: #292524 !important; color: #f5f5f4 !important; border-color: #44403c !important; }
+html.dark .share-btn { background: #292524 !important; border-color: #44403c !important; }
+html.dark .share-btn.primary, html.dark .shared-banner button { background: #2563eb !important; border-color: #2563eb !important; }
+html.dark .share-btn.danger { color: #f87171 !important; }
+html.dark .shared-banner { background: rgba(96,165,250,.14) !important; }
+
+/* Celular / telas estreitas: o painel vira gaveta */
+@media (max-width: 900px) {
+  .chat-layout { padding: 0 .5rem; }
+  .history-toggle { display: inline-flex; }
+  .history-panel {
+    position: fixed; top: 0; left: 0; bottom: 0; margin: 0; width: 290px; border-radius: 0 14px 14px 0;
+    z-index: 60; transform: translateX(-105%); transition: transform .2s ease;
+  }
+  .history-panel.open { transform: none; }
+  .hist-actions { display: flex; }
+}

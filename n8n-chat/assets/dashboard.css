@@ -1,0 +1,88 @@
+        body { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+        .ic { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+        .ic-sm { width: 0.95rem; height: 0.95rem; }
+
+        /* Hexágono: eco discreto da logo */
+        .hex { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+
+        /* Foco visível */
+        :focus-visible { outline: 2px solid #FF5A00; outline-offset: 2px; border-radius: 6px; }
+
+        /* Entrada única e suave da página */
+        @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .rise { animation: rise .45s cubic-bezier(.2,.7,.2,1) both; }
+        .rise-1 { animation-delay: .05s; } .rise-2 { animation-delay: .12s; } .rise-3 { animation-delay: .19s; }
+
+        @keyframes alertIn { from { opacity: 0; transform: translateY(-8px) scale(.98); } to { opacity: 1; transform: none; } }
+        .alert-in { animation: alertIn .35s cubic-bezier(.2,.7,.2,1) both; }
+        .alert-out { opacity: 0; transform: translateY(-6px); transition: all .25s ease; }
+
+        .metric { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+        .metric:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -12px rgba(9,5,111,.25); border-color: #d6d8e8; }
+
+        .row-user { transition: background-color .15s ease; }
+        .row-user:hover { background-color: #F9FAFC; }
+        .row-user:hover .row-actions { opacity: 1; }
+        @media (hover: hover) { .row-actions { opacity: .75; transition: opacity .15s ease; } }
+
+        /* Modal */
+        #deleteModal { transition: opacity .2s ease; }
+        #deleteModal .modal-card { transition: transform .2s cubic-bezier(.2,.7,.2,1); transform: translateY(8px) scale(.98); }
+        #deleteModal.open .modal-card { transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+
+
+/* ========================================== */
+/* SUPORTE AUTOMÁTICO AO MODO ESCURO (DARK MODE) */
+/* ========================================== */
+html.dark body {
+    background-color: #0c0a09 !important;
+    color: #f5f5f4 !important;
+}
+
+html.dark main,
+html.dark header,
+html.dark .bg-white,
+html.dark .modal-card {
+    background-color: #1c1917 !important;
+    color: #f5f5f4 !important;
+    border-color: #292524 !important;
+}
+
+html.dark input[type="search"] {
+    background-color: #292524 !important;
+    color: #f5f5f4 !important;
+    border-color: #44403c !important;
+}
+
+html.dark .row-user:hover {
+    background-color: #292524 !important;
+}
+
+html.dark th, 
+html.dark td {
+    border-color: #292524 !important;
+}
+
+html.dark h1, 
+html.dark h2, 
+html.dark h3, 
+html.dark p, 
+html.dark span {
+    color: inherit;
+}
+
+html.dark .text-slate-500, 
+html.dark .text-slate-600 {
+    color: #a8a29e !important;
+}
+
+html.dark .bg-slate-50, 
+html.dark .bg-slate-100 {
+    background-color: #292524 !important;
+    color: #f5f5f4 !important;
+    border-color: #44403c !important;
+}

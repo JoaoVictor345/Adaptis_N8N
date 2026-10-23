@@ -1,0 +1,223 @@
+:root {
+    /* Paleta extraída da logo Adaptis */
+    --adaptis-navy: #060b5e;
+    --adaptis-orange: #fa5a0a;
+
+    --background: #f7f8fb;
+    --card: #ffffff;
+    --text: #12163d;
+    --muted: #6f7590;
+    --border: #e6e8f0;
+}
+
+/* Modo escuro */
+html.dark {
+    --background: #07091f;
+    --card: #0e1230;
+    --text: #f3f4fb;
+    --muted: #9aa0c0;
+    --border: #1d2248;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(circle at 50% 35%, rgba(6, 11, 94, 0.06), transparent 40%),
+        var(--background);
+
+    font-family: Manrope, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    color: var(--text);
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Manchas de cor no fundo: azul e laranja da logo */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+body::before {
+    background: var(--adaptis-navy);
+    top: -120px;
+    left: -100px;
+}
+
+body::after {
+    background: var(--adaptis-orange);
+    bottom: -140px;
+    right: -100px;
+}
+
+html.dark body::before {
+    opacity: 0.35;
+}
+
+.logout-card {
+    width: min(390px, calc(100% - 32px));
+    padding: 42px 38px 36px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 24px 70px rgba(6, 11, 94, 0.10),
+        0 4px 16px rgba(6, 11, 94, 0.05);
+
+    animation: cardEnter 0.55s ease-out;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Logo dentro do anel giratório */
+.logout-logo {
+    position: relative;
+    width: 118px;
+    height: 118px;
+    margin: 0 auto 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+
+    background: conic-gradient(
+        from 0deg,
+        var(--adaptis-navy) 0 38%,
+        var(--adaptis-orange) 38% 52%,
+        rgba(6, 11, 94, 0.10) 52% 100%
+    );
+
+    animation: rotateRing 1.8s linear infinite;
+}
+
+/* Miolo do anel */
+.logout-ring::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: #ffffff; /* sempre claro: a logo azul precisa de fundo branco */
+}
+
+.logout-logo img {
+    position: relative;
+    z-index: 2;
+    width: 62px;
+    height: auto;
+    display: block;
+}
+
+.title {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    margin-bottom: 9px;
+}
+
+.description {
+    max-width: 285px;
+    margin: 0 auto;
+
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+/* Barra de progresso */
+.progress-container {
+    width: 100%;
+    height: 4px;
+    margin-top: 28px;
+
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+
+    background: linear-gradient(90deg, var(--adaptis-navy), var(--adaptis-orange));
+
+    animation: progress 1.8s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
+html.dark .progress {
+    background: linear-gradient(90deg, #4a54d6, var(--adaptis-orange));
+}
+
+.brand {
+    margin-top: 20px;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    color: var(--muted);
+}
+
+@keyframes rotateRing {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes progress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logout-card {
+        padding: 36px 26px 30px;
+    }
+}
