@@ -1,56 +1,55 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
+
 require_once __DIR__ . '/../config/auth.php';
-requireLogin();
 header('Content-Type: application/json; charset=utf-8');
 
 try {
-    require_once __DIR__ . '/../config/auth.php';
-    
-    // Se não estiver logado, em vez de carregar HTML, devolve um erro JSON limpo
-    if (!isset($_SESSION['user_id'])) {
+    if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
         http_response_code(401);
         echo json_encode(['ok' => false, 'error' => 'Sessão expirada. Faça login novamente.']);
         exit;
     }
-    
-    requireLogin();
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Erro de autenticação: ' . $e->getMessage()]);
     exit;
 }
 
+// CORREÇÃO DA FUNÇÃO DB PARA USAR O DATABASE.PHP CORRETAMENTE
 function db(): PDO {
-    global $pdo;
-    // Se o seu config/database.php já cria a variável $pdo global:
+    if (function_exists('getDBConnection')) {
+        return getDBConnection();
+    }
     if (file_exists(__DIR__ . '/../config/database.php')) {
         require_once __DIR__ . '/../config/database.php';
-    }
-    if (isset($pdo) && $pdo instanceof PDO) {
-        return $pdo;
+        if (function_exists('getDBConnection')) {
+            return getDBConnection();
+        }
     }
     
-    // Fallback caso o $pdo global não venha preenchido:
     static $instance = null;
     if (!$instance) {
-        $instance = new PDO('mysql:host=127.0.0.1;dbname=n8n_chat_db;charset=utf8mb4', 'USUARIO', 'SENHA', [
+        $instance = new PDO('mysql:host=127.0.0.1;dbname=n8n_chat_db;charset=utf8mb4', 'root', '', [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }
     return $instance;
 }
-/* ============================================================ */
 
 function out(array $d, int $code = 200): never {
     http_response_code($code);
     echo json_encode($d + ['ok' => $code < 400], JSON_UNESCAPED_UNICODE);
     exit;
 }
-function fail(string $msg, int $code = 400): never { out(['error' => $msg], $code); }
+function fail(string $msg, int $code = 400): never { 
+    out(['ok' => false, 'error' => $msg], $code); 
+}
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'fetch') {
-    fail('Requisição inválida');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    fail('Requisição inválida', 405);
 }
 
 $in  = json_decode(file_get_contents('php://input'), true) ?: [];
@@ -74,7 +73,6 @@ function sharedConversation(PDO $pdo, $token): array {
 }
 
 switch ($in['action'] ?? '') {
-
     case 'list':
         $st = $pdo->prepare('SELECT id, title, share_token IS NOT NULL AS shared, updated_at
                              FROM chat_conversations WHERE user_id = ? ORDER BY updated_at DESC LIMIT 200');
