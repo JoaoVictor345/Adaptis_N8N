@@ -1,5 +1,5 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 requireLogin();
 
 $themeClass = getThemeClass();
@@ -10,7 +10,7 @@ $themeClass = getThemeClass();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Assistente Virtual - ADAPTIS</title>
-  <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
   <!-- Tailwind para a Sidebar e estrutura de layout -->
@@ -22,7 +22,7 @@ $themeClass = getThemeClass();
       }
     </script>
   <!-- CSS customizado do Chat IDETE -->
-  <link rel="stylesheet" href="assets/css/workflow.css">
+  <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/workflow.css">
   <style>
     body {
       display: flex;
@@ -151,18 +151,18 @@ html.dark .message.bot #initialMessage {
     color: var(--text) !important;
 }
   </style>
-  <link rel="stylesheet" href="assets/css/History.css">
+  <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/History.css">
 </head>
 <body>
 
   <!-- Menu Lateral (Sidebar) -->
-  <?php include 'includes/sidebar.php'; ?>
+  <?php include __DIR__ . '/../includes/sidebar.php'; ?>
 
   <!-- Conteúdo Principal do Chat -->
   <div class="main-wrapper">
     <header>
       <div class="brand">
-        <img src="Imagens/Adaptis_logo2-removebg.png" alt="IDETE">
+        <img src="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2-removebg.png" alt="IDETE">
         <div class="brand-title">
           <h1>ADAPTIS</h1>
           <p>Assistente Virtual Adaptativo — Logado como: <b><?= htmlspecialchars($_SESSION['user_email']) ?></b></p>
@@ -228,7 +228,7 @@ html.dark .message.bot #initialMessage {
       role: "<?= $_SESSION['user_role'] ?>"
     };
   </script>
-  <script src="assets/workflow.js"></script>
-  <script src="assets/History.js"></script>
+  <script src="/Adaptis_N8N/n8n-chat/assets/js/workflow.js"></script>
+  <script src="/Adaptis_N8N/n8n-chat/assets/js/History.js"></script>
 </body>
 </html>

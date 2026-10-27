@@ -1,8 +1,8 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 
 if (isLoggedIn()) {
-    header("Location: " . (isAdmin() ? "admin/dashboard.php" : "chat.php"));
+    header("Location: " . APP_BASE_PATH . (isAdmin() ? '/admin/dashboard.php' : '/pages/chat.php'));
     exit;
 }
 
@@ -47,10 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cadastro - ADAPTIS</title>
-    <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/register.css">
+    <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/register.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
     <style>
         /* Estilo para alinhar o ícone do olho nos campos de senha */
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="register-wrapper">
         <div class="register-card">
             <div class="register-header">
-                <img src="Imagens/Adaptis_logo2-removebg.png" alt="IDETE">
+                <img src="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2-removebg.png" alt="IDETE">
                 <h2>Criar Conta</h2>
                 <p>Adaptis · Assistente Virtual Adaptativo</p>
             </div>
@@ -104,11 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if ($success): ?>
                 <div class="alert-success">
                     <?= htmlspecialchars($success) ?><br>
-                    <a href="login.php" class="btn-link">Ir para o Login</a>
+                    <a href="/Adaptis_N8N/n8n-chat/auth/login.php" class="btn-link">Ir para o Login</a>
                 </div>
             <?php else: ?>
 
-            <form action="register.php" method="POST">
+            <form action="/Adaptis_N8N/n8n-chat/auth/register.php" method="POST">
                 <div class="form-group">
                     <label>Nome Completo</label>
                     <input type="text" name="full_name" required value="<?= htmlspecialchars($_POST['full_name'] ?? '') ?>" placeholder="Seu nome">
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <div class="register-footer">
-                Já tem uma conta? <a href="login.php">Fazer login</a>
+                Já tem uma conta? <a href="/Adaptis_N8N/n8n-chat/auth/login.php">Fazer login</a>
             </div>
         </div>
 

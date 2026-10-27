@@ -1,1 +1,6 @@
-ErrorDocument 404 /Adaptis_N8N/n8n-chat/404.php
+ErrorDocument 404 /Adaptis_N8N/n8n-chat/errors/404.php
+
+# Impede o download público da cópia de recuperação usada na migração.
+<FilesMatch "^\.pre-reorganization\.zip$">
+    Require all denied
+</FilesMatch>

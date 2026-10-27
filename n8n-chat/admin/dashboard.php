@@ -1,5 +1,5 @@
 <?php
-require_once '../config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 requireAdmin(); // Protegido: apenas Admin ou Super Admin entram aqui
 
 $pdo = getDBConnection();
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $_SESSION['flash'] = $flash;
-    header('Location: dashboard.php');
+    header('Location: ' . APP_BASE_PATH . '/admin/dashboard.php');
     exit;
 }
 
@@ -156,7 +156,7 @@ $flashStyles = [
         <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
     </svg>
 
-    <?php include '../includes/sidebar.php'; ?>
+    <?php include __DIR__ . '/../includes/sidebar.php'; ?>
 
     <main class="flex-1 flex flex-col h-full overflow-y-auto">
 

@@ -1,5 +1,5 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 
 $error = '';
 $success = '';
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$email, $token, $expires]);
 
             // Link de redefinição
-            $resetLink = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/reset-password.php?token=" . $token;
+            $resetLink = "http://" . $_SERVER['HTTP_HOST'] . APP_BASE_PATH . "/auth/reset-password.php?token=" . $token;
 
             // Nota: Em produção, enviarias isto por e-mail (PHPMailer / mail()). 
             // Para testes locais no XAMPP, exibimos o link diretamente na tela:
@@ -45,10 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Recuperar Senha - ADAPTIS</title>
-    <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/login.css">
 </head>
 <body>
     <div class="blob blob-azul-topo"></div>
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-wrapper" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="login-card">
             <div class="login-header">
-                <img src="Imagens/Adaptis_logo2-removebg.png" alt="IDETE">
+                <img src="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2-removebg.png" alt="IDETE">
                 <h2>Recuperar Senha</h2>
                 <p>Informe seu e-mail para receber o link</p>
             </div>
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?= $success ?>
                 </div>
             <?php else: ?>
-                <form action="forgot-password.php" method="POST">
+                <form action="/Adaptis_N8N/n8n-chat/auth/forgot-password.php" method="POST">
                     <div class="form-group">
                         <label>E-mail cadastrado</label>
                         <input type="email" name="email" required placeholder="seu.email@idete.com">
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <div class="login-footer">
-                Lembrou a senha? <a href="login.php">Fazer login</a>
+                Lembrou a senha? <a href="/Adaptis_N8N/n8n-chat/auth/login.php">Fazer login</a>
             </div>
         </div>
     </div>

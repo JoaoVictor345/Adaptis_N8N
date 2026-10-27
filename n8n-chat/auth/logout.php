@@ -1,5 +1,5 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 
 // Limpa todas as variáveis de sessão
 $_SESSION = array();
@@ -28,7 +28,7 @@ session_destroy();
 
     <title>Encerrando sessão | IDETE</title>
 
-    <link rel="stylesheet" href="assets/css/logout.css">
+    <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/logout.css">
 </head>
 
 <body>
@@ -39,7 +39,7 @@ session_destroy();
 
             <div class="logout-ring"></div>
 
-            <img src="Imagens/Adaptis_logo2-removebg.png" alt="Logo">
+            <img src="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2-removebg.png" alt="Logo">
 
         </div>
 
@@ -63,7 +63,7 @@ session_destroy();
 
     <script>
         setTimeout(() => {
-            window.location.href = "login.php";
+            window.location.href = "/Adaptis_N8N/n8n-chat/auth/login.php";
         }, 1800);
     </script>
 

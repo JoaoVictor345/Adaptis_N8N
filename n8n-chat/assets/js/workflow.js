@@ -1,5 +1,5 @@
 // URL do Webhook do n8n
-    const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook/adaptis';
+    const N8N_WEBHOOK_URL = '../api/webhook-proxy.php';
 
     // Utiliza o ID do usuário logado no PHP como chat_id / user_id
     const userId = window.PHP_USER ? window.PHP_USER.id : 'guest';

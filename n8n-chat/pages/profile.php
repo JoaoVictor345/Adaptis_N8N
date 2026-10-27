@@ -1,5 +1,5 @@
 <?php
-    require_once 'config/auth.php';
+    require_once __DIR__ . '/../config/auth.php';
     requireLogin();
 
     // Garante que a conexão $pdo está ativa
@@ -33,16 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
                 if (in_array($fileExtension, $allowedExtensions)) {
-                    $uploadDir = 'uploads/avatars/';
+                    $uploadDir = __DIR__ . '/../uploads/avatars/';
                     if (!is_dir($uploadDir)) {
                         mkdir($uploadDir, 0755, true);
                     }
                     
                     $newFileName = 'user_' . $userId . '_' . time() . '.' . $fileExtension;
-                    $dest_path = $uploadDir . $newFileName;
+                    $destPath = $uploadDir . $newFileName;
+                    $avatarPath = 'uploads/avatars/' . $newFileName;
                     
-                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                        $avatarPath = $dest_path;
+                    if (move_uploaded_file($fileTmpPath, $destPath)) {
+                        // O banco guarda uma URL relativa ao projeto; o sistema usa o caminho físico acima.
                     } else {
                         $error = "Erro ao mover o arquivo de imagem enviado.";
                     }
@@ -106,9 +107,9 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>Meu Perfil</title>
-    <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/profile.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="shortcut icon" href="Adaptis_logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
     <script>
       tailwind.config = {
@@ -118,7 +119,7 @@ try {
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-gray-100 flex h-screen overflow-hidden">
     
-    <?php include 'includes/sidebar.php'; ?>
+    <?php include __DIR__ . '/../includes/sidebar.php'; ?>
 
     <main class="flex-1 flex flex-col h-full overflow-y-auto">
         <header class="bg-white/80 backdrop-blur-md border-b px-8 py-5 shadow-xs flex justify-between items-center sticky top-0 z-10">
@@ -148,7 +149,7 @@ try {
                 </div>
             <?php endif; ?>
 
-            <form action="profile.php" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <form action="/Adaptis_N8N/n8n-chat/pages/profile.php" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <!-- Coluna Lateral: Foto e Resumo -->
                 <div class="md:col-span-1 space-y-6">

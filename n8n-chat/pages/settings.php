@@ -1,5 +1,5 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 requireLogin(); // Garante que apenas usuários logados acessem
 
 $currentUser = getCurrentUser();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Configurações - Adaptis</title>
-    <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-stone-100 text-stone-900 flex h-screen overflow-hidden">
 
     <!-- Menu Lateral -->
-    <?php include 'includes/sidebar.php'; ?>
+    <?php include __DIR__ . '/../includes/sidebar.php'; ?>
 
     <!-- Conteúdo Principal -->
     <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <!-- Formulário de Preferências -->
-            <form action="settings.php" method="POST" class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+            <form action="/Adaptis_N8N/n8n-chat/pages/settings.php" method="POST" class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-stone-200">
                     <h2 class="text-lg font-semibold text-stone-900">Preferências da Conta</h2>
                     <p class="text-xs text-stone-500 mt-0.5">Personalize o comportamento da plataforma para o seu usuário.</p>

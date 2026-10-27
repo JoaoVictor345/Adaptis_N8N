@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/database.php';
 
-
+define('APP_BASE_PATH', '/Adaptis_N8N/n8n-chat');
 
 function isLoggedIn() {
     return isset($_SESSION['user_id']);
@@ -26,7 +26,7 @@ function isAdmin() {
 function requireLogin() {
     if (!isLoggedIn()) {
         // Caminho absoluto para garantir que vai buscar o login na raiz, mesmo estando na pasta admin/
-        header("Location: /Adaptis_N8N/n8n-chat/login.php");
+        header("Location: /Adaptis_N8N/n8n-chat/auth/login.php");
         exit;
     }
 }
@@ -35,7 +35,7 @@ function requireAdmin() {
     requireLogin();
     if (!isAdmin()) {
         // Caminho absoluto para garantir que vai buscar o 403 na raiz, mesmo estando na pasta admin/
-        header("Location: /Adaptis_N8N/n8n-chat/403.php");
+        header("Location: /Adaptis_N8N/n8n-chat/errors/403.php");
         exit;
     }
 }
@@ -55,7 +55,7 @@ function getCurrentUser() {
         $user = $stmt->fetch();
 
         if ($user && empty($user['avatar'])) {
-            $user['avatar'] = 'Imagens/default-avatar.png';
+            $user['avatar'] = 'assets/images/default-avatar.png';
         }
 
         return $user ? $user : null;

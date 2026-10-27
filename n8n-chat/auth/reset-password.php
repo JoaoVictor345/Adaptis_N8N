@@ -1,5 +1,5 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 
 $error = '';
 $success = '';
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     // Verifica se o token GET é válido antes de mostrar o form
     if (empty($token)) {
-        header("Location: login.php");
+        header('Location: ' . APP_BASE_PATH . '/auth/login.php');
         exit;
     }
     $pdo = getDBConnection();
@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nova Senha - ADAPTIS</title>
-    <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
     <style>
         .password-container { position: relative; display: flex; align-items: center; }
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-wrapper" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="login-card">
             <div class="login-header">
-                <img src="Imagens/Adaptis_logo2-removebg.png" alt="IDETE">
+                <img src="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2-removebg.png" alt="IDETE">
                 <h2>Nova Senha</h2>
                 <p>Insira a sua nova senha de acesso</p>
             </div>
@@ -83,17 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if ($error && !$success): ?>
                 <div class="alert-error"><?= htmlspecialchars($error) ?></div>
                 <?php if (strpos($error, 'inválido') !== false): ?>
-                    <div style="text-align: center; margin-top: 1rem;"><a href="forgot-password.php" style="color: var(--azul); font-weight: 700;">Solicitar novo link</a></div>
+                    <div style="text-align: center; margin-top: 1rem;"><a href="/Adaptis_N8N/n8n-chat/auth/forgot-password.php" style="color: var(--azul); font-weight: 700;">Solicitar novo link</a></div>
                 <?php endif; ?>
             <?php endif; ?>
 
             <?php if ($success): ?>
                 <div style="background: #def7ec; color: #03543f; padding: 1rem; border-radius: 8px; font-size: 0.9rem; text-align: center; margin-bottom: 1.25rem;">
                     <?= htmlspecialchars($success) ?><br><br>
-                    <a href="login.php" class="btn-link" style="background: var(--azul); color: #fff; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; font-weight: 700;">Ir para o Login</a>
+                    <a href="/Adaptis_N8N/n8n-chat/auth/login.php" class="btn-link" style="background: var(--azul); color: #fff; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; font-weight: 700;">Ir para o Login</a>
                 </div>
             <?php elseif (empty($error) || strpos($error, 'expirado') === false): ?>
-                <form action="reset-password.php" method="POST">
+                <form action="/Adaptis_N8N/n8n-chat/auth/reset-password.php" method="POST">
                     <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
                     
                     <div class="form-group">

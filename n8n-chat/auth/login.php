@@ -1,8 +1,8 @@
 <?php
-require_once 'config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 
 if (isLoggedIn()) {
-    header("Location: " . (isAdmin() ? "admin/dashboard.php" : "chat.php"));
+    header("Location: " . APP_BASE_PATH . (isAdmin() ? '/admin/dashboard.php' : '/pages/chat.php'));
     exit;
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'];
 
-            header("Location: " . ($user['role'] === 'admin' ? "admin/dashboard.php" : "chat.php"));
+            header("Location: " . APP_BASE_PATH . ($user['role'] === 'admin' ? '/admin/dashboard.php' : '/pages/chat.php'));
             exit;
         } else {
             $error = "E-mail ou senha inválidos.";
@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - ADAPTIS</title>
-    <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
     <style>
         /* Estilo rápido para o contentor do input de senha com o ícone do olho */
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-wrapper">
         <div class="login-card">
             <div class="login-header">
-                <img src="Imagens/Adaptis_logo2-removebg.png" alt="IDETE">
+                <img src="/Adaptis_N8N/n8n-chat/assets/images/Adaptis_logo2-removebg.png" alt="IDETE">
                 <h2>Bem-vindo de Volta!</h2>
                 <p>Adaptis · Assistente Virtual Adaptativo</p>
             </div>
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert-error"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
 
-            <form action="login.php" method="POST">
+            <form action="/Adaptis_N8N/n8n-chat/auth/login.php" method="POST">
                 <div class="form-group">
                     <label>E-mail</label>
                     <input type="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="seu.email@idete.com">
@@ -112,14 +112,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-extras">
-                    <a href="forgot-password.php">Esqueceu a senha?</a>
+                    <a href="/Adaptis_N8N/n8n-chat/auth/forgot-password.php">Esqueceu a senha?</a>
                 </div>
 
                 <button type="submit" class="btn-submit">Entrar</button>
             </form>
 
             <div class="login-footer">
-                Não tem uma conta? <a href="register.php">Cadastre-se</a>
+                Não tem uma conta? <a href="/Adaptis_N8N/n8n-chat/auth/register.php">Cadastre-se</a>
             </div>
         </div>
 

@@ -13,10 +13,10 @@ if (function_exists('getCurrentUser')) {
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
 
-$isChat      = $currentPath === '/Adaptis_N8N/n8n-chat/chat.php';
-$isProfile   = $currentPath === '/Adaptis_N8N/n8n-chat/profile.php';
+$isChat      = $currentPath === '/Adaptis_N8N/n8n-chat/pages/chat.php';
+$isProfile   = $currentPath === '/Adaptis_N8N/n8n-chat/pages/profile.php';
 $isAdminArea = strpos($currentPath, '/Adaptis_N8N/n8n-chat/admin/') !== false;
-$isSettings = $currentPath === '/Adaptis_N8N/n8n-chat/settings.php';
+$isSettings = $currentPath === '/Adaptis_N8N/n8n-chat/pages/settings.php';
 
 $linkBase = 'relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors';
 $linkOn   = 'bg-stone-200/70 font-medium text-stone-900';
@@ -42,7 +42,7 @@ if (!empty($rawAvatar)) {
         }
     }
 } else {
-    $avatarUrl = '/n8n-chat/Imagens/default-avatar.png'; // Caminho padrão se não houver avatar
+    $avatarUrl = '/Adaptis_N8N/n8n-chat/assets/images/default-avatar.png'; // Caminho padrão se não houver avatar
 }
 
 $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
@@ -50,14 +50,14 @@ $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
 <aside class="sticky top-0 flex h-screen w-60 shrink-0 flex-col justify-between border-r border-stone-200 bg-stone-50 p-3 text-stone-800">
     <div>
         <!-- Marca -->
-        <a href="/Adaptis_N8N/n8n-chat/chat.php" class="flex items-center gap-2.5 px-3 py-3">
+        <a href="/Adaptis_N8N/n8n-chat/pages/chat.php" class="flex items-center gap-2.5 px-3 py-3">
             <span class="h-2.5 w-2.5 rounded-full bg-teal-700"></span>
             <span class="text-[15px] font-semibold tracking-tight text-stone-900">Chat Adaptativo</span>
         </a>
 
         <!-- Navegação -->
         <nav class="mt-4 space-y-0.5" aria-label="Navegação principal">
-            <a href="/Adaptis_N8N/n8n-chat/chat.php"
+            <a href="/Adaptis_N8N/n8n-chat/pages/chat.php"
                class="<?= $linkBase ?> <?= $isChat ? $linkOn : $linkOff ?>"
                <?= $isChat ? 'aria-current="page"' : '' ?>>
                 <?php if ($isChat): ?><span class="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-teal-700"></span><?php endif; ?>
@@ -65,7 +65,7 @@ $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
                 Conversas
             </a>
 
-            <a href="/Adaptis_N8N/n8n-chat/profile.php"
+            <a href="/Adaptis_N8N/n8n-chat/pages/profile.php"
                class="<?= $linkBase ?> <?= $isProfile ? $linkOn : $linkOff ?>"
                <?= $isProfile ? 'aria-current="page"' : '' ?>>
                 <?php if ($isProfile): ?><span class="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-teal-700"></span><?php endif; ?>
@@ -73,7 +73,7 @@ $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
                 Meu perfil
             </a>
 
-            <a href="/Adaptis_N8N/n8n-chat/settings.php"
+            <a href="/Adaptis_N8N/n8n-chat/pages/settings.php"
                 class="<?= $linkBase ?> <?= $isSettings ? $linkOn : $linkOff ?>"
                 <?= $isSettings ? 'aria-current="page"' : '' ?>>
                 <?php if ($isSettings): ?><span class="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-teal-700"></span><?php endif; ?>
@@ -97,7 +97,7 @@ $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
 
     <!-- Usuário -->
     <div class="flex items-center gap-3 rounded-md border border-stone-200 bg-white p-2.5">
-        <a href="/Adaptis_N8N/n8n-chat/profile.php"><img src="<?= htmlspecialchars($avatarUrl) ?>" alt="Avatar" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full object-cover bg-stone-900 text-sm font-medium text-stone-50" id="avatar-preview"></a>
+        <a href="/Adaptis_N8N/n8n-chat/pages/profile.php"><img src="<?= htmlspecialchars($avatarUrl) ?>" alt="Avatar" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full object-cover bg-stone-900 text-sm font-medium text-stone-50" id="avatar-preview"></a>
 
         <div class="min-w-0 flex-1 leading-tight">
             <p class="truncate text-sm font-medium text-stone-900"><?= htmlspecialchars($userName) ?></p>
@@ -106,7 +106,7 @@ $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
             </p>
         </div>
 
-        <a href="/Adaptis_N8N/n8n-chat/logout.php"
+        <a href="/Adaptis_N8N/n8n-chat/auth/logout.php"
            title="Sair"
            aria-label="Sair"
            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-stone-500 transition-colors hover:bg-stone-100 hover:text-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-700">

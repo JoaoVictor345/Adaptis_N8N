@@ -1,7 +1,8 @@
 /* Histórico de conversas + compartilhamento.
    Funciona sem alterar o workflow.js: observa o #chatBox e salva cada .message.user / .message.bot. */
 (() => {
-  const API = 'api/history.php';
+  const APP_BASE = '/Adaptis_N8N/n8n-chat';
+  const API = APP_BASE + '/api/history.php';
   const $ = (s) => document.querySelector(s);
   const chatBox = $('#chatBox');
   const params = new URLSearchParams(location.search);
@@ -104,7 +105,7 @@
   async function deleteConv(i) {
     if (!confirm(`Excluir a conversa "${i.title}"? Links compartilhados deixarão de funcionar.`)) return;
     await api('delete', { id: i.id });
-    if (i.id == currentId) return (location.href = 'chat.php');
+    if (i.id == currentId) return (location.href = APP_BASE + '/pages/chat.php');
     refreshList();
   }
 
@@ -139,7 +140,7 @@
       setTitle(conversation.title);
       renderMessages(messages);
       $('#shareCurrent').disabled = false;
-      history.replaceState(null, '', 'chat.php?c=' + id);
+      history.replaceState(null, '', APP_BASE + '/pages/chat.php?c=' + id);
       $('#historyPanel').classList.remove('open');
       renderList();
     } catch (e) { alert(e.message); }
@@ -166,7 +167,7 @@
       b.innerHTML = '<span>Conversa compartilhada com você. Modo somente leitura.</span><button type="button">Salvar cópia e continuar</button>';
       b.querySelector('button').onclick = async () => {
         const { id } = await api('clone', { token });
-        location.href = 'chat.php?c=' + id;
+        location.href = APP_BASE + '/pages/chat.php?c=' + id;
       };
       document.querySelector('.chat-container').prepend(b);
     } catch (e) {
@@ -182,7 +183,7 @@
       currentId = r.id;
       setTitle(r.title);
       $('#shareCurrent').disabled = false;
-      history.replaceState(null, '', 'chat.php?c=' + r.id);
+      history.replaceState(null, '', APP_BASE + '/pages/chat.php?c=' + r.id);
       creating = null;
       return r.id;
     });
@@ -264,7 +265,7 @@
   }
 
   /* ---------- Eventos e inicialização ---------- */
-  $('#newChatBtn').onclick = () => (location.href = 'chat.php'); // recarrega e zera o contexto do assistente
+  $('#newChatBtn').onclick = () => (location.href = APP_BASE + '/pages/chat.php'); // recarrega e zera o contexto do assistente
   $('#historySearch').addEventListener('input', renderList);
   $('#shareCurrent').onclick = () => currentId && openShare(currentId);
   $('#historyToggle').onclick = () => $('#historyPanel').classList.toggle('open');

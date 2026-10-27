@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/404.css">
+<link rel="stylesheet" href="/Adaptis_N8N/n8n-chat/assets/css/404.css">
 </head>
 <body>
 <main>
@@ -22,8 +22,8 @@
       <li>Se o link veio de um favorito antigo, atualize-o.</li>
     </ul>
     <div class="actions">
-      <button class="btn primary" onclick="history.length>1?history.back():location.href='/'">Voltar à página anterior</button>
-      <a class="btn ghost" href="/">Ir para o início</a>
+      <button class="btn primary" onclick="history.length>1?history.back():location.href='/Adaptis_N8N/n8n-chat/pages/chat.php'">Voltar à página anterior</button>
+      <a class="btn ghost" href="/Adaptis_N8N/n8n-chat/pages/chat.php">Ir para o início</a>
     </div>
   </section>
 
