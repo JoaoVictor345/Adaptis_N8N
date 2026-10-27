@@ -22,7 +22,7 @@ $themeClass = getThemeClass();
       }
     </script>
   <!-- CSS customizado do Chat IDETE -->
-  <link rel="stylesheet" href="assets/workflow.css">
+  <link rel="stylesheet" href="assets/css/workflow.css">
   <style>
     body {
       display: flex;
@@ -151,7 +151,7 @@ html.dark .message.bot #initialMessage {
     color: var(--text) !important;
 }
   </style>
-  <link rel="stylesheet" href="assets/history.css">
+  <link rel="stylesheet" href="assets/css/History.css">
 </head>
 <body>
 
@@ -228,7 +228,7 @@ html.dark .message.bot #initialMessage {
       role: "<?= $_SESSION['user_role'] ?>"
     };
   </script>
-  <script src="assets/JS/workflow.js"></script>
-  <script src="assets/JS/History.js"></script>
+  <script src="assets/workflow.js"></script>
+  <script src="assets/History.js"></script>
 </body>
 </html>

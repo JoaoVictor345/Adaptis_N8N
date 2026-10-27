@@ -26,7 +26,7 @@ function isAdmin() {
 function requireLogin() {
     if (!isLoggedIn()) {
         // Caminho absoluto para garantir que vai buscar o login na raiz, mesmo estando na pasta admin/
-        header("Location: /n8n-chat/login.php");
+        header("Location: /Adaptis_N8N/n8n-chat/login.php");
         exit;
     }
 }
@@ -35,7 +35,7 @@ function requireAdmin() {
     requireLogin();
     if (!isAdmin()) {
         // Caminho absoluto para garantir que vai buscar o 403 na raiz, mesmo estando na pasta admin/
-        header("Location: /n8n-chat/403.php");
+        header("Location: /Adaptis_N8N/n8n-chat/403.php");
         exit;
     }
 }
