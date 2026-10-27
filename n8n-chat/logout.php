@@ -28,7 +28,7 @@ session_destroy();
 
     <title>Encerrando sessão | IDETE</title>
 
-    <link rel="stylesheet" href="assets/logout.css">
+    <link rel="stylesheet" href="assets/css/logout.css">
 </head>
 
 <body>

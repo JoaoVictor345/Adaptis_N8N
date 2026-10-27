@@ -50,8 +50,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/register.css">
+    <link rel="stylesheet" href="assets/css/register.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <style>
+        /* Estilo para alinhar o ícone do olho nos campos de senha */
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 2.5rem;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--texto-suave);
+            font-size: 1.2rem;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+        .toggle-password:hover {
+            color: var(--azul);
+        }
+    </style>
 </head>
 <body>
     <!-- Formas decorativas -->
@@ -88,14 +117,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>E-mail</label>
                     <input type="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="seu.email@exemplo.com">
                 </div>
+                
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" name="password" required placeholder="Mínimo 6 caracteres">
+                    <div class="password-container">
+                        <input type="password" name="password" id="passwordInput" required placeholder="Mínimo 6 caracteres">
+                        <button type="button" id="togglePasswordBtn" class="toggle-password" title="Mostrar senha">
+                            <i class="bi-eye-slash" id="eyeIcon"></i>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label>Confirmar Senha</label>
-                    <input type="password" name="confirm_password" required placeholder="Repita a senha">
+                    <div class="password-container">
+                        <input type="password" name="confirm_password" id="confirmPasswordInput" required placeholder="Repita a senha">
+                        <button type="button" id="toggleConfirmBtn" class="toggle-password" title="Mostrar senha">
+                            <i class="bi-eye-slash" id="eyeConfirmIcon"></i>
+                        </button>
+                    </div>
                 </div>
+
                 <button type="submit" class="btn-submit">Cadastrar</button>
             </form>
 
@@ -155,5 +197,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </svg>
         </div>
     </div>
+
+    <!-- Script para alternar a visibilidade de ambos os campos de senha -->
+    <script>
+        function setupPasswordToggle(btnId, inputId, iconId) {
+            const btn = document.getElementById(btnId);
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+
+            if (!btn || !input || !icon) return;
+
+            btn.addEventListener('click', function () {
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+
+                if (type === 'text') {
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                    btn.setAttribute('title', 'Ocultar senha');
+                } else {
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                    btn.setAttribute('title', 'Mostrar senha');
+                }
+            });
+        }
+
+        setupPasswordToggle('togglePasswordBtn', 'passwordInput', 'eyeIcon');
+        setupPasswordToggle('toggleConfirmBtn', 'confirmPasswordInput', 'eyeConfirmIcon');
+    </script>
 </body>
 </html>

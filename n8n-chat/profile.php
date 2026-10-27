@@ -106,7 +106,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>Meu Perfil</title>
-    <link rel="stylesheet" href="assets/profile.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="shortcut icon" href="Adaptis_logo2.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">

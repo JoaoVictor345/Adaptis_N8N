@@ -228,7 +228,7 @@ html.dark .message.bot #initialMessage {
       role: "<?= $_SESSION['user_role'] ?>"
     };
   </script>
-  <script src="assets/workflow.js"></script>
-  <script src="assets/history.js"></script>
+  <script src="assets/JS/workflow.js"></script>
+  <script src="assets/JS/History.js"></script>
 </body>
 </html>

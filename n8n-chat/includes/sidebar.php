@@ -50,7 +50,7 @@ $initial = mb_strtoupper(mb_substr(trim($userName) ?: 'U', 0, 1));
 <aside class="sticky top-0 flex h-screen w-60 shrink-0 flex-col justify-between border-r border-stone-200 bg-stone-50 p-3 text-stone-800">
     <div>
         <!-- Marca -->
-        <a href="/n8n-chat/chat.php" class="flex items-center gap-2.5 px-3 py-3">
+        <a href="/Adaptis_N8N/n8n-chat/chat.php" class="flex items-center gap-2.5 px-3 py-3">
             <span class="h-2.5 w-2.5 rounded-full bg-teal-700"></span>
             <span class="text-[15px] font-semibold tracking-tight text-stone-900">Chat Adaptativo</span>
         </a>

@@ -44,8 +44,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="shortcut icon" href="Imagens/Adaptis_logo2.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/login.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <style>
+        /* Estilo rápido para o contentor do input de senha com o ícone do olho */
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 2.5rem; /* Espaço para o ícone não sobrepor o texto */
+        }
+        .toggle-password {
+            position: absolute;
+            right: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--texto-suave);
+            font-size: 1.2rem;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+        .toggle-password:hover {
+            color: var(--azul);
+        }
+    </style>
 </head>
 <body>
     <!-- Formas decorativas -->
@@ -71,14 +100,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>E-mail</label>
                     <input type="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="seu.email@idete.com">
                 </div>
+                
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" name="password" required placeholder="••••••••">
+                    <div class="password-container">
+                        <input type="password" name="password" id="passwordInput" required placeholder="••••••••">
+                        <button type="button" id="togglePasswordBtn" class="toggle-password" title="Mostrar senha">
+                            <i class="bi-eye-slash" id="eyeIcon"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="form-extras">
-                    <label><input type="checkbox" name="remember"> Lembrar</label>
-                    <a href="#">Esqueceu a senha?</a>
+                    <a href="forgot-password.php">Esqueceu a senha?</a>
                 </div>
 
                 <button type="submit" class="btn-submit">Entrar</button>
@@ -144,5 +178,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </svg>
         </div>
     </div>
+
+    <script>
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const passwordInput = document.getElementById('passwordInput');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        toggleBtn.addEventListener('click', function () {
+            // Alterna o tipo do input entre password e text
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Alterna o ícone do olho (bi-eye / bi-eye-slash)
+            if (type === 'text') {
+                eyeIcon.classList.remove('bi-eye-slash');
+                eyeIcon.classList.add('bi-eye');
+                toggleBtn.setAttribute('title', 'Ocultar senha');
+            } else {
+                eyeIcon.classList.remove('bi-eye');
+                eyeIcon.classList.add('bi-eye-slash');
+                toggleBtn.setAttribute('title', 'Mostrar senha');
+            }
+        });
+    </script>
 </body>
 </html>
